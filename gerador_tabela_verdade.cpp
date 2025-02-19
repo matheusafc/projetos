@@ -1,9 +1,7 @@
-// Matheus Alexandre Farias Cioca  RA  1140482422031
-// Matheus de Oliveira             RA  1140482422025
-// Pedro Aguirre                   RA  1140482422032
 
 
-// DeclaraÁ„o das biblitecas utilizadas. 
+
+// Declara√ß√£o das biblitecas utilizadas. 
 #include<stdio.h> 
 #include<math.h>
 #include<locale.h> 
@@ -12,53 +10,53 @@
 	
 	
 	
-	// FunÁ„o que monta, imprime e escreve em arquivo, a tabela verdade. 
+	// Fun√ß√£o que monta, imprime e escreve em arquivo, a tabela verdade. 
 	void tabelaVerdade(int n, int valor_estado[], char nome_variaveis[][4], char nome_saida[4], FILE *pont_arq) { 
-    int linhas = pow(2, n); // Calcula a quantidade de estados de acordo com o n˙mero de vari·veis
+    int linhas = pow(2, n); // Calcula a quantidade de estados de acordo com o n√∫mero de vari√°veis
     
-    fprintf(pont_arq, "\nTabela Verdade para %d vari·veis:\n\nEstado", n); // Escreve no arquivo posteriomente caso desejado pelo usu·rio
-    printf( "\nTabela Verdade para %d vari·veis:\n\nEstado", n); // CabeÁalho tabela 
+    fprintf(pont_arq, "\nTabela Verdade para %d vari√°veis:\n\nEstado", n); // Escreve no arquivo posteriomente caso desejado pelo usu√°rio
+    printf( "\nTabela Verdade para %d vari√°veis:\n\nEstado", n); // Cabe√ßalho tabela 
 
-    for (int i = 0; i < n; i++) {  // Loop para impress„o dos nomes das variaveis 
-        fprintf(pont_arq, "\t| %s", nome_variaveis[i]); // Escreve no arquivo posteriomente caso desejado pelo usu·rio
+    for (int i = 0; i < n; i++) {  // Loop para impress√£o dos nomes das variaveis 
+        fprintf(pont_arq, "\t| %s", nome_variaveis[i]); // Escreve no arquivo posteriomente caso desejado pelo usu√°rio
 		printf( "\t| %s", nome_variaveis[i]); 
     }
-    fprintf(pont_arq, "\t| %s \n",nome_saida); // Escreve no arquivo posteriomente caso desejado pelo usu·rio
-	printf( "\t| %s \n",nome_saida);  // Loop para impress„o dos nomes de saida
+    fprintf(pont_arq, "\t| %s \n",nome_saida); // Escreve no arquivo posteriomente caso desejado pelo usu√°rio
+	printf( "\t| %s \n",nome_saida);  // Loop para impress√£o dos nomes de saida
     
-	for (int i = 0; i < linhas; i++) { // Loop para impress„o de "#" 
-        fprintf(pont_arq, "#%d \t", i); // Escreve no arquivo posteriomente caso desejado pelo usu·rio
+	for (int i = 0; i < linhas; i++) { // Loop para impress√£o de "#" 
+        fprintf(pont_arq, "#%d \t", i); // Escreve no arquivo posteriomente caso desejado pelo usu√°rio
         printf( "#%d \t", i);
         
         for (int j = n - 1; j >= 0; j--) { 
-            fprintf(pont_arq, "| %d\t", (i >> j) & 1); // Escreve no arquivo posteriomente caso desejado pelo usu·rio
+            fprintf(pont_arq, "| %d\t", (i >> j) & 1); // Escreve no arquivo posteriomente caso desejado pelo usu√°rio
             printf( "| %d\t", (i >> j) & 1);
         }
-        fprintf(pont_arq, "| %d\n", valor_estado[i]); // Escreve no arquivo posteriomente caso desejado pelo usu·rio
+        fprintf(pont_arq, "| %d\n", valor_estado[i]); // Escreve no arquivo posteriomente caso desejado pelo usu√°rio
         printf( "| %d\n", valor_estado[i]);
     }
 }
  
- // FunÁ„o Mintermo e Maxtermo
-	void gerarMintermoMaxtermo(int n, char nome_variaveis[][4], int valor_estado[], char* mintermo, char* maxtermo) { // FunÁ„o que gera mintermo e maxtermo
+ // Fun√ß√£o Mintermo e Maxtermo
+	void gerarMintermoMaxtermo(int n, char nome_variaveis[][4], int valor_estado[], char* mintermo, char* maxtermo) { // Fun√ß√£o que gera mintermo e maxtermo
     strcpy(mintermo, ""); // Zera a string do mintermo
     strcpy(maxtermo, ""); // Zera a string do maxtermo
-    int linhas=pow(2, n);  // Calcula a quantidade de estados de acordo com o n˙mero de vari·veis
+    int linhas=pow(2, n);  // Calcula a quantidade de estados de acordo com o n√∫mero de vari√°veis
  
 
     for (int i = 0; i < linhas; i++) { // Mintermos
         if (valor_estado[i] == 1) {
             if (strlen(mintermo) > 0) {
-                strcat(mintermo, " + "); // Se n„o for o primeiro mintermo, adiciona o operador +
+                strcat(mintermo, " + "); // Se n√£o for o primeiro mintermo, adiciona o operador +
             }
             strcat(mintermo, "(");
             for (int j = 0; j < n; j++) {
-                int bit = (i >> (n - j - 1)) & 1; // Valor do bit da vari·vel
+                int bit = (i >> (n - j - 1)) & 1; // Valor do bit da vari√°vel
                 if (bit == 1) {
-                    strcat(mintermo, nome_variaveis[j]);  // Mintermo (vari·vel)
+                    strcat(mintermo, nome_variaveis[j]);  // Mintermo (vari√°vel)
                 } else {
-                    strcat(mintermo, "~");               // NegaÁ„o no Mintermo
-                    strcat(mintermo, nome_variaveis[j]); // Vari·vel no Mintermo
+                    strcat(mintermo, "~");               // Nega√ß√£o no Mintermo
+                    strcat(mintermo, nome_variaveis[j]); // Vari√°vel no Mintermo
                 }
                 if (j < n - 1) {
                     strcat(mintermo, " * "); // AND no Mintermo
@@ -72,16 +70,16 @@
     for (int i = 0; i < linhas; i++) { // Maxtermos
         if (valor_estado[i] == 0) {
             if (strlen(maxtermo) > 0) {
-                strcat(maxtermo, " * "); // Se n„o for o primeiro maxtermo, adiciona o operador *
+                strcat(maxtermo, " * "); // Se n√£o for o primeiro maxtermo, adiciona o operador *
             }
             strcat(maxtermo, "(");
             for (int j = 0; j < n; j++) {
-                int bit = (i >> (n - j - 1)) & 1; // Valor do bit da vari·vel
+                int bit = (i >> (n - j - 1)) & 1; // Valor do bit da vari√°vel
                 if (bit == 0) {
-                    strcat(maxtermo, nome_variaveis[j]);  // Maxtermo (vari·vel)
+                    strcat(maxtermo, nome_variaveis[j]);  // Maxtermo (vari√°vel)
                 } else {
-                    strcat(maxtermo, "~");               // NegaÁ„o no Maxtermo
-                    strcat(maxtermo, nome_variaveis[j]); // Vari·vel no Maxtermo
+                    strcat(maxtermo, "~");               // Nega√ß√£o no Maxtermo
+                    strcat(maxtermo, nome_variaveis[j]); // Vari√°vel no Maxtermo
                 }
                 if (j < n - 1) {
                     strcat(maxtermo, " + "); // OR no Maxtermo
@@ -92,32 +90,32 @@
     }
 }
 	
-	// FunÁ„o salvar >>> caso solicitado salvar, SALVA O ARQUIVO NA PASTA DO .EXE 
+	// Fun√ß√£o salvar >>> caso solicitado salvar, SALVA O ARQUIVO NA PASTA DO .EXE 
 	void salvar(int n, int valor_estado[], char nome_variaveis[][4], char nome_saida[4], FILE *pont_arq, char* mintermo, char* maxtermo, char save, char nome_arquivo[50]) { 
 	
 	
-		while(save!= 's' && save!='S' && save!= 'n' && save!= 'N') // ValidaÁ„o para a opÁ„o de escolha do salvar ( Sim ou n„o )
+		while(save!= 's' && save!='S' && save!= 'n' && save!= 'N') // Valida√ß√£o para a op√ß√£o de escolha do salvar ( Sim ou n√£o )
 	{
-			printf("\nDeseja salvar? S=Sim / N=N„o:"); 
+			printf("\nDeseja salvar? S=Sim / N=N√£o:"); 
     		scanf(" %c", &save);
 	}
-    	if(save == 'S' || save == 's') // Estrutura para opÁ„o SIM no salvar arquivo
+    	if(save == 'S' || save == 's') // Estrutura para op√ß√£o SIM no salvar arquivo
 		{
-        	printf("\nDigite o nome do arquivo (Sem espaÁos): ");
+        	printf("\nDigite o nome do arquivo (Sem espa√ßos): ");
         	while (getchar() != '\n');
         	scanf("%49s", nome_arquivo); // Leitura nome do arquivo limitado a 49 caracteres
 			pont_arq = fopen(nome_arquivo, "w"); // abertura do arquivo 
-        	if(pont_arq == NULL) // ValidaÁ„o se o arquivo foi aberto
+        	if(pont_arq == NULL) // Valida√ß√£o se o arquivo foi aberto
 		{
 			printf("\n\nErro na abertura do arquivo!\n");
         }
         	
-			else // Se aberto corretamente, salva no arquivo tabela, vari·veis e as funÁıes
+			else // Se aberto corretamente, salva no arquivo tabela, vari√°veis e as fun√ß√µes
         {
         	
         	tabelaVerdade(n, valor_estado, nome_variaveis, nome_saida, pont_arq); // Direcionando ponteiro do arquivo
-        	fprintf(pont_arq, "\nFunÁ„o de Mintermo: %s\n", mintermo); // Escreve o titulo da funÁ„o e escreve a funÁ„o mintermo 
-        	fprintf(pont_arq, "FunÁ„o de Maxtermo: %s\n", maxtermo);  // Escreve o titulo da funÁ„o e escreve a funÁ„o maxtermo
+        	fprintf(pont_arq, "\nFun√ß√£o de Mintermo: %s\n", mintermo); // Escreve o titulo da fun√ß√£o e escreve a fun√ß√£o mintermo 
+        	fprintf(pont_arq, "Fun√ß√£o de Maxtermo: %s\n", maxtermo);  // Escreve o titulo da fun√ß√£o e escreve a fun√ß√£o maxtermo
         	fclose(pont_arq); // Fecha o arquivo
 		
 			system("cls");  // Limpar tela 
@@ -130,7 +128,7 @@
 	else 
 	{
 		system("cls"); // Limpar tela 
-		printf("\n\nArquivo n„o salvo!"); // Impress„o da mensagem de arquivo n„o salvo 
+		printf("\n\nArquivo n√£o salvo!"); // Impress√£o da mensagem de arquivo n√£o salvo 
 	}
 	
 }
@@ -138,66 +136,66 @@
 
 int main() { 
 	
-    setlocale(LC_ALL, "Portuguese"); // Define o idioma para lingua portuguesa ( utilizaÁ„o de acentuaÁ„o ) 
+    setlocale(LC_ALL, "Portuguese"); // Define o idioma para lingua portuguesa ( utiliza√ß√£o de acentua√ß√£o ) 
 	
-	// DeclaraÁ„o de variaveis 
+	// Declara√ß√£o de variaveis 
 	FILE *pont_arq; 
     char save, nome_arquivo[50];
     int n, valid;
     
     
-    do { // Leitura e validaÁ„o da quantidade de variaveis digitado pelo usuario 
-	    printf("Digite o n˙mero de vari·veis (2-7): ");
+    do { // Leitura e valida√ß√£o da quantidade de variaveis digitado pelo usuario 
+	    printf("Digite o n√∫mero de vari√°veis (2-7): ");
         valid=scanf("%d", &n);
 
         while (getchar() != '\n'); 
 
         if (valid != 1 || n < 2 || n > 7) {
-            printf("N˙mero inv·lido! Digite um n˙mero entre 2 e 7.\n\n");
+            printf("N√∫mero inv√°lido! Digite um n√∫mero entre 2 e 7.\n\n");
             valid = 0; 
         }
     } while (valid != 1 || n < 2 || n > 7);
 
-    char nome_variaveis[n][4], nome_saida[4]; // DeclaraÁ„o de variaveis 
+    char nome_variaveis[n][4], nome_saida[4]; // Declara√ß√£o de variaveis 
     
-    for(int i = 0; i < n; i++) {  // Leitura e validaÁ„o dos nomes das variavÈis 
+    for(int i = 0; i < n; i++) {  // Leitura e valida√ß√£o dos nomes das variav√©is 
         do {
-            printf("Digite o nome da vari·vel %d (m·x. 3 caracteres): ", i + 1);
+            printf("Digite o nome da vari√°vel %d (m√°x. 3 caracteres): ", i + 1);
             scanf("%s", nome_variaveis[i]);
 
             if(strlen(nome_variaveis[i]) > 3) {
-                printf("Nome inv·lido! O nome deve conter no m·ximo atÈ 3 caracteres.\n");
+                printf("Nome inv√°lido! O nome deve conter no m√°ximo at√© 3 caracteres.\n");
             }
         } while(strlen(nome_variaveis[i]) > 3);
     }
     
-    do  // Leitura e validaÁ„o dos nomes de saida
+    do  // Leitura e valida√ß√£o dos nomes de saida
     {
 
-    printf("\nDigite um nome para a saÌda (m·x. 3 caracteres): ");
+    printf("\nDigite um nome para a sa√≠da (m√°x. 3 caracteres): ");
     scanf("%s", nome_saida);
 	
 	if(strlen(nome_saida) > 3) {
-                printf("Nome inv·lido! O nome deve conter no m·ximo atÈ 3 caracteres.\n");
+                printf("Nome inv√°lido! O nome deve conter no m√°ximo at√© 3 caracteres.\n");
             }
         } while(strlen(nome_saida) > 3);
     
 	
-	int linhas = pow(2, n); // DeclaraÁ„o de variavel iniciada para calcular a quantidade de linhas(estados) da tabela verdade
-    int valor_estado[linhas]; // DeclaraÁ„o de variavel
+	int linhas = pow(2, n); // Declara√ß√£o de variavel iniciada para calcular a quantidade de linhas(estados) da tabela verdade
+    int valor_estado[linhas]; // Declara√ß√£o de variavel
 
-    for(int i = 0; i < linhas; i++) { // Leitura e validaÁ„o do valor de cada estado 
+    for(int i = 0; i < linhas; i++) { // Leitura e valida√ß√£o do valor de cada estado 
        
        int valid_estado;
        
 	    do {
-            printf("\nSaÌda %s #%d (0-1): ",nome_saida, i);
+            printf("\nSa√≠da %s #%d (0-1): ",nome_saida, i);
            valid_estado=scanf("%d", &valor_estado[i]);
 			while (getchar() != '\n'); 
 			
             if(valid_estado != 1 || valor_estado[i] < 0 || valor_estado[i] > 1) 
 			{
-                printf("\nErro! O valor de saÌda deve ser 0 ou 1.\n");
+                printf("\nErro! O valor de sa√≠da deve ser 0 ou 1.\n");
             	valid_estado=0; 
 			}
         } while(valid_estado != 1 || valor_estado[i] < 0 || valor_estado[i] > 1);
@@ -212,10 +210,10 @@ int main() {
     
     gerarMintermoMaxtermo(n, nome_variaveis, valor_estado, mintermo, maxtermo); // Gerar mintermo e maxtermo
 
-    printf("\nFunÁ„o de Mintermo: %s\n", mintermo); // Imprimir mintermo
-    printf("\nFunÁ„o de Maxtermo: %s\n", maxtermo); // Imprimir maxtermo
+    printf("\nFun√ß√£o de Mintermo: %s\n", mintermo); // Imprimir mintermo
+    printf("\nFun√ß√£o de Maxtermo: %s\n", maxtermo); // Imprimir maxtermo
     
-   	salvar(n, valor_estado,  nome_variaveis,  nome_saida, pont_arq,  mintermo, maxtermo,  save,  nome_arquivo); // Chama a funÁ„o salvar
+   	salvar(n, valor_estado,  nome_variaveis,  nome_saida, pont_arq,  mintermo, maxtermo,  save,  nome_arquivo); // Chama a fun√ß√£o salvar
    	
 
     return 0;
